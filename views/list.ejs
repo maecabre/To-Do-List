@@ -1,0 +1,32 @@
+	<%- include('header'); -%>
+
+	<body>
+		<!-- Title and Date -->
+		<div class="box" id="heading">
+			<h1><%= kindOfList %> List</h1>
+			<h1><%= kindOfDay %></h1>
+		</div>
+
+		<div class="box">
+			<!-- List Items -->
+			<% newItems.forEach(item =>{ %>
+				<form action="/delete" method="post">
+					<div class="item">
+						<input type="checkbox" name="checkbox" value="<%= item._id %>" onchange="this.form.submit()">
+						<input type="hidden" name="listName" value="<%= kindOfList %>">
+						<!-- input tag above with hidden type to include more caribale in the post request -->
+						<p> <%= item.name %> </p>
+					</div>
+				</form>
+			<% }); %>
+
+			<!-- Form for new inputs -->
+			<form class="item" action="/" method="post">
+				<input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+				<button class="w-100 btn btn-lg btn-primary" name="button" value="<%- kindOfList %>" type="submit">+</button>
+			</form>
+
+		</div>		
+	</body>
+
+	<%- include('footer'); -%>
